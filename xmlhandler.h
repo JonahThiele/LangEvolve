@@ -16,7 +16,9 @@ class Xmlhandler {
   public:
    Xmlhandler(char* filename);
    std::vector<Word> GetWords();
-   std::string TrimWhiteSpace(std::string);
    int GetGenerations();
+   const std::string GetCharSet();
+   const std::string GetVowSet();
+   std::string TrimWhiteSpace(std::string);
    void LogWords(std::vector<Word>);
 };

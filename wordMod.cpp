@@ -1,14 +1,16 @@
 #include "wordMod.hpp"
 #include <iostream>
 
-WordMod::WordMod(const char charSet[],const char Vowels[]){
+WordMod::WordMod(const std::string CharSet,const std::string VowelSet){
     // copy over character set to class
-    for(int currChar = 0; currChar < strlen(charSet) - 1; currChar++){
-        CharacterSet[currChar] = charSet[currChar];
+    charSetSize = CharSet.size();
+    vowSetSize = VowelSet.size();
+    for(int currChar = 0; currChar < CharSet.size() - 1; currChar++){
+        CharacterSet[currChar] = CharSet[currChar];
     }
     // copy over vowel set to class
-    for(int currVowel = 0; currVowel < strlen(charSet) - 1; currVowel++){
-        CharacterSet[currVowel] = charSet[currVowel];
+    for(int currVowel = 0; currVowel < VowelSet.size() - 1; currVowel++){
+        CharacterSet[currVowel] = VowelSet[currVowel];
     }
 }
 
@@ -43,13 +45,11 @@ std::string WordMod::ApplyCharMask(std::string Word, std::vector<int> mask){
     srand (time(NULL));
     for(int WordIndex = 0; WordIndex < Word.length()-1; WordIndex++){
         if(mask[WordIndex] == 1){
-            int Charnum = rand() % charSetSize;
+            int Charnum = rand() % charSetSize - 1;
             NewWord += CharacterSet[Charnum];
-            std::cout << "word construction:" << NewWord << std::endl;
         }
         else{
             NewWord += Word[WordIndex];
-            std::cout << "word construction:" << NewWord << std::endl;
 
         }
     }

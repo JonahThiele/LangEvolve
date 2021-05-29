@@ -12,15 +12,32 @@ int Xmlhandler::GetGenerations(){
     return generations;
 }
 
+const std::string Xmlhandler::GetCharSet(){
+    std::string charSet = loadDoc.child("CharacterSet").text().as_string();
+    if(charSet == "DEFAULT"){
+        std::string vowSet = "abcdefghijklmnopqrstuvwxyz";
+    }
+    const std::string CcharSet = charSet;
+    return CcharSet;
+}
+
+const std::string Xmlhandler::GetVowSet(){
+    std::string vowSet = loadDoc.child("VowelSet").text().as_string();
+    if(vowSet == "DEFAULT"){
+        std::string vowSet = "aeou";
+    }
+    const std::string CvowSet = vowSet;
+    return CvowSet;
+}
+
+
 std::vector<Word> Xmlhandler::GetWords(){
     std::vector<Word> origin_dict;
     pugi::xml_node wordList = loadDoc.child("Word_List");
     for (pugi::xml_node xmlWord = loadDoc.child("Word_List").child("Word"); xmlWord; xmlWord = xmlWord.next_sibling("Word")){
         std::string strword = TrimWhiteSpace(xmlWord.text().as_string());
-        std::cout << strword << std::endl;
         pugi::xml_node xmlMeaning = xmlWord.child("Meaning");
         std::string strmeaning = xmlMeaning.text().as_string();
-        std::cout << strmeaning << std::endl;
         Word word(strword, strword, strmeaning);
         origin_dict.push_back(word);
     }
@@ -39,7 +56,7 @@ std::vector<Word> Xmlhandler::GetWords(){
           auto outmeaning = outword.append_child("Meaning");
           auto outmeaning_val = outmeaning.text().set(Words[WordIndex].get_meaning().c_str());
       }
-      bool saveSucceeded = outdoc.save_file("out");
+      bool saveSucceeded = outdoc.save_file("out.xml");
 
 }
 

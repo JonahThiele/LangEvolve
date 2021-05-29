@@ -5,9 +5,9 @@
 #include "Constants.h"
 #include <vector>
 
-std::vector<Word> RunGeneration(std::vector<Word> Wordlist){
+std::vector<Word> RunGeneration(std::vector<Word> Wordlist, std::string characterSet, std::string vowelSet){
 	std::vector<Word> newwordlist;
-	WordMod Modhandle(DefaultCharSet, DefaultVowels);
+	WordMod Modhandle(characterSet, vowelSet);
 	srand (time(NULL));
 	for(int Words = 0; Words < Wordlist.size() - 1; Words++){
 		int changed = rand() % 100 + 1;
@@ -24,19 +24,18 @@ std::vector<Word> RunGeneration(std::vector<Word> Wordlist){
 	return newwordlist;
 }
 
-std::vector<Word> Run_sim(int generations, std::vector<Word> originDict){
+std::vector<Word> Run_sim(int generations, std::vector<Word> originDict, std::string characterSet, std::string vowelSet){
 	std::vector<Word> WordList;
 	for(int WordIndex = 0; WordIndex < originDict.size() - 1; WordIndex++){
 		WordList.push_back(originDict[WordIndex]);
 	}
 	for(int CurrGen = 0; CurrGen < generations; CurrGen++){
-		std::vector<Word> NewWordList = RunGeneration(WordList);
+		std::vector<Word> NewWordList = RunGeneration(WordList, characterSet, vowelSet);
 		for(int WordIndex = 0; WordIndex < NewWordList.size() - 1; WordIndex++){
 			WordList.push_back(NewWordList[WordIndex]);
 		}
 		// debugging word list
 		for(int i = 0; i < WordList.size() - 1; i++){
-			std::cout << "Word:" << WordList[i].get_word() << std::endl;
 		}
 	}
 	return WordList;
@@ -50,7 +49,9 @@ int main(int argc, char *argv[]){
 	Xmlhandler handle(argv[1]);
 	int generations = handle.GetGenerations();
 	std::vector<Word> originDict = handle.GetWords();
-	std::vector<Word> GeneratedWords = Run_sim(generations, originDict);
+	std::string characterSet = handle.GetCharSet();
+	std::string vowelSet = handle.GetVowSet();
+	std::vector<Word> GeneratedWords = Run_sim(generations, originDict, characterSet, vowelSet);
 	log_sim(handle, GeneratedWords);
 	return 0;
 }

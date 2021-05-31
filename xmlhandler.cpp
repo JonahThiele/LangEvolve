@@ -1,7 +1,4 @@
 #include "xmlhandler.h"
-#include <iostream>
-#include <algorithm>
-
 
 Xmlhandler::Xmlhandler(char* filename){
     tree = loadDoc.load_file(filename);
@@ -38,8 +35,11 @@ std::vector<Word> Xmlhandler::GetWords(){
         std::string strword = TrimWhiteSpace(xmlWord.text().as_string());
         pugi::xml_node xmlMeaning = xmlWord.child("Meaning");
         std::string strmeaning = xmlMeaning.text().as_string();
-        Word word(strword, strword, strmeaning);
-        origin_dict.push_back(word);
+        pugi::xml_node xmlType = xmlWord.child("Type");
+        std::string strtype = xmlType.text().as_string();
+        Word newword(strword, strword, strmeaning);
+        origin_dict.push_back(newword);
+
     }
     return origin_dict;
 }
@@ -70,3 +70,22 @@ std::string Xmlhandler::TrimWhiteSpace(std::string Word){
     }
     return Word;
 }
+
+/*Word Xmlhandler::Getinheritance(std::string type, std::string root, std::string strword, std::string meaning, std::vector<Word> originDict){
+    if(type == "Noun"){
+       Noun newword()
+
+    }
+    else if(type == "Adjective"){
+
+    }
+    else if(type == "Verb"){
+
+    }
+    else if(type == "Adverb"){
+
+    }
+    else if(type == "Conjunction"){
+
+    }
+}*/

@@ -1,6 +1,11 @@
 #pragma once
 #include "pugixml-1.11/src/pugixml.hpp"
 #include "Base_word.h"
+//#include "verb.h"
+//#include "noun.h"
+//#include "adjective.hpp"
+//#include "adverb.hpp"
+//#include "conjunction.hpp"
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -21,4 +26,5 @@ class Xmlhandler {
    const std::string GetVowSet();
    std::string TrimWhiteSpace(std::string);
    void LogWords(std::vector<Word>);
+   Word Getinheritance(std::string, std::string, std::string, std::string, std::vector<Word>);
 };

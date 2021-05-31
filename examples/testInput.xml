@@ -2,30 +2,39 @@
 <Generations>2</Generations>
 <Word_List>
     <Word> iJndAFlxoB 
+        <Type>Noun</Type>
         <Meaning>  child </Meaning>
      </Word>
     <Word> CmFLobEVlx 
-         <Meaning>  forest </Meaning>
+        <Type>Noun</Type>
+        <Meaning>  forest </Meaning>
      </Word>
     <Word> oFgEmImtQt 
-         <Meaning>  family </Meaning>
+        <Type>Noun</Type>
+        <Meaning>  family </Meaning>
      </Word>
     <Word> suVJknQtuu 
-         <Meaning>  land </Meaning>
+        <Type>Noun</Type>
+        <Meaning>  land </Meaning>
      </Word>
-    <Word> XqFHTwvvpO 
-         <Meaning>  profession </Meaning>
+    <Word> XqFHTwvvpO
+        <Type>Noun</Type> 
+        <Meaning>  profession </Meaning>
      </Word>
-    <Word> TEsxjDNUep 
-         <Meaning>  eat </Meaning>
+    <Word> TEsxjDNUep
+        <Type>Verb</Type>
+        <Meaning>  eat </Meaning>
      </Word>
-    <Word> sHUfOMBImq 
-         <Meaning>  attack </Meaning>
+    <Word> sHUfOMBImq
+        <Type>Verb</Type> 
+        <Meaning>  attack </Meaning>
      </Word>
     <Word> marguzgXZv 
-         <Meaning>  loudly </Meaning>
+        <Type>Adverb</Type>
+        <Meaning>  loudly </Meaning>
      </Word>
-    <Word> SReWQKGJJv 
-         <Meaning>  silently </Meaning>
+    <Word> SReWQKGJJv
+        <Type>Adverb</Type>
+        <Meaning>  silently </Meaning>
      </Word>
 </Word_List>

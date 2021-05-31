@@ -1,17 +1,11 @@
 #include "wordMod.hpp"
-#include <iostream>
 
 WordMod::WordMod(const std::string CharSet,const std::string VowelSet){
-    // copy over character set to class
+    srand (time(NULL));
     charSetSize = CharSet.size();
     vowSetSize = VowelSet.size();
-    for(int currChar = 0; currChar < CharSet.size() - 1; currChar++){
-        CharacterSet[currChar] = CharSet[currChar];
-    }
-    // copy over vowel set to class
-    for(int currVowel = 0; currVowel < VowelSet.size() - 1; currVowel++){
-        CharacterSet[currVowel] = VowelSet[currVowel];
-    }
+    CharacterSet = CharSet;
+    VowelChars = VowelSet;
 }
 
 // debug func
@@ -24,11 +18,13 @@ void printVec(std::vector<int> Vec, std::string message){
 }
 
 std::vector<int> WordMod::CreateChangedMask(std::string Word){
-    srand (time(NULL));
     std::vector<int> changedCharsMask;
     for( int currCharPos = 0; currCharPos < Word.length()-1; currCharPos++){
         int maskNum = rand() % 100 + 1;
-        if (maskNum <= PERCENT_CHANGE){
+        if(std::find(VowelChars.begin(), VowelChars.end(), Word[currCharPos]) != VowelChars.end()){
+            changedCharsMask.push_back(0);
+        }
+        else if (maskNum <= PERCENT_CHANGE){
             changedCharsMask.push_back(1);
         }
         else{
@@ -54,4 +50,24 @@ std::string WordMod::ApplyCharMask(std::string Word, std::vector<int> mask){
         }
     }
     return NewWord;
+}
+
+Word WordMod::CreateNewWord(MeaningHandle meaningHandle){
+    // generate meaning
+    std::string strmeaning = meaningHandle.GetMeaning(false, "null");
+    int wordlength = rand() % 20 + 1;
+    std::string strWord;
+    for( int i = 0; i < wordlength; i++){
+        char generatedChar = CharacterSet[rand() % charSetSize];
+        strWord += generatedChar;
+    }
+    Word newword(strWord, strWord, strmeaning);
+    return newword;
+}
+
+std::vector<Word> WordMod::DeleteRepeats(std::vector<Word> wordlist){
+    for(int currword = 0; currword < wordlist.size(); currword++){
+        wordlist.erase(std::remove(wordlist.begin(), wordlist.end(), wordlist[currword]), wordlist.end());
+    }
+    return wordlist;
 }

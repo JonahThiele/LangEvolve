@@ -9,6 +9,7 @@
 #include "Base_word.h"
 #include "meaninghandler.hpp"
 #include <iostream>
+#include <memory>
 
 class WordMod {
     private:
@@ -23,10 +24,10 @@ class WordMod {
     std::vector<int> CreateChangedMask(std::string);
     std::string ApplyCharMask(std::string, std::vector<int>);
     //create new word
-    Word CreateNewWord(MeaningHandle);
+    std::shared_ptr<Word> CreateNewWord(MeaningHandle);
     // apply new meanings
 
     // purge repeat words
-    std::vector<Word> DeleteRepeats(std::vector<Word>);
+    std::vector<std::shared_ptr<Word>> DeleteRepeats(std::vector<std::shared_ptr<Word>>);
 
 };

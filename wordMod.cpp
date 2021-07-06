@@ -52,7 +52,7 @@ std::string WordMod::ApplyCharMask(std::string Word, std::vector<int> mask){
     return NewWord;
 }
 
-Word WordMod::CreateNewWord(MeaningHandle meaningHandle){
+std::shared_ptr<Word> WordMod::CreateNewWord(MeaningHandle meaningHandle){
     // generate meaning
     std::string strmeaning = meaningHandle.GetMeaning(false, "null");
     int wordlength = rand() % 20 + 1;
@@ -61,13 +61,13 @@ Word WordMod::CreateNewWord(MeaningHandle meaningHandle){
         char generatedChar = CharacterSet[rand() % charSetSize];
         strWord += generatedChar;
     }
-    Word newword(strWord, strWord, strmeaning);
+    std::shared_ptr<Word> newword(new Word(strWord, strWord, strmeaning));
     return newword;
 }
 
-std::vector<Word> WordMod::DeleteRepeats(std::vector<Word> wordlist){
+std::vector<std::shared_ptr<Word>> WordMod::DeleteRepeats(std::vector<std::shared_ptr<Word>> wordlist){
     for(int currword = 0; currword < wordlist.size(); currword++){
-        wordlist.erase(std::remove(wordlist.begin(), wordlist.end(), wordlist[currword]), wordlist.end());
+        wordlist.erase(std::remove(wordlist.begin(), wordlist.end(), wordlist[currword]->get_word()), wordlist.end());
     }
     return wordlist;
 }

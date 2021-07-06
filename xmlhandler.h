@@ -9,6 +9,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <memory>
 
 
 class Xmlhandler {
@@ -20,11 +21,11 @@ class Xmlhandler {
 
   public:
    Xmlhandler(char* filename);
-   std::vector<Word> GetWords();
+   std::vector<std::shared_ptr<Word>> GetWords();
    int GetGenerations();
    const std::string GetCharSet();
    const std::string GetVowSet();
    std::string TrimWhiteSpace(std::string);
-   void LogWords(std::vector<Word>);
-   Word Getinheritance(std::string, std::string, std::string, std::string, std::vector<Word>);
+   void LogWords(std::vector<std::shared_ptr<Word>>);
+   std::shared_ptr<Word> Getinheritance(std::string, std::string, std::string, std::string, std::vector<std::shared_ptr<Word>>);
 };
